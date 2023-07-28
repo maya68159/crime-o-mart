@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Crime-O-Mart</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="./imageMapResizer.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <!-- Content goes here -->
+
+      <!-- ////////////////////////////////////////////////////////////////////////////////////// -->
+      <!-- page 1  page 1  page 1  page 1  page 1  page 1  page 1  page 1  page 1  page 1  page 1 -->
+
+      <div class="page" v-if="page == 1">
+        <div class="wrapper">
+          <div class="home">
+            <img
+              src="20230724_120249.png"
+              alt="logo"
+              @click="goToPage(1); clearCart()"
+            />
+          </div>
+          <div class="ads">
+            <img src="meet-and-greet.png" alt="poster" />
+            <img src="organ-sale.png" alt="organ" />
+            <img src="Yellow Law Firm Facebook Cover.png" alt="lawfirm" />
+            <img src="burglary-workshop.png" alt="" />
+          </div>
+
+          <div class="setting">
+            <img
+              src="codeschool-crime-project.png"
+              alt="crimeScene"
+              usemap="#workmap"
+            />
+            <map name="workmap" @click="goToPage(2)">
+              <area shape="rect" coords="400,368,590,500" alt="Enter" />
+            </map>
+          </div>
+        </div>
+        <div class="instructions">Click on the doors to begin shopping.</div>
+      </div>
+
+      <!-- ////////////////////////////////////////////////////////////////////////////////////// -->
+      <!-- page 2  page 2  page 2  page 2  page 2  page 2  page 2  page 2  page 2  page 2  page 2 -->
+
+      <div class="page" v-if="page == 2">
+        <div class="wrapper">
+          <div class="home">
+            <img
+              src="20230724_120249.png"
+              alt="logo"
+              @click="goToPage(1); clearCart()"
+            />
+          </div>
+          <div class="cart">
+            <div v-for="item in cart" class="row-body">
+              <div><img v-bind:src="item.image" alt="crimeScene" /></div>
+            </div>
+          </div>
+
+          <div class="setting">
+            <img src="Crime-Aisle.png" alt="crimeAisle" usemap="#workmap" />
+            <map name="workmap">
+              <!--theft aisle-->
+              <area
+                shape="rect"
+                coords="22,170,140,592"
+                @click="goToPage(3)"
+                alt="Theft"
+              />
+              <!--assault aisle-->
+              <area
+                shape="rect"
+                coords="187,170,305,592"
+                @click="goToPage(4)"
+                alt="Assault"
+              />
+              <!--traffic aisle-->
+              <area
+                shape="rect"
+                coords="362,170,478,592"
+                @click="goToPage(5) "
+                alt="Traffic"
+              />
+              <!--drugs aisle-->
+              <area
+                shape="rect"
+                coords="525,170,641,592"
+                @click="goToPage(6)"
+                alt="Drugs"
+              />
+              <!--clearance aisle-->
+              <area
+                shape="rect"
+                coords="688,170,806,592"
+                @click="goToPage(7)"
+                alt="Clearance"
+              />
+            </map>
+          </div>
+        </div>
+        <div class="instructions">Choose an aisle to shop from.</div>
+      </div>
+
+      <!-- ////////////////////////////////////////////////////////////////////////////////////// -->
+      <!-- page 3  page 3  page 3  page 3  page 3  page 3  page 3  page 3  page 3  page 3  page 3 -->
+
+      <div class="page" v-if="page == 3">
+        <div class="wrapper">
+          <div class="home">
+            <img
+              src="20230724_120249.png"
+              alt="logo"
+              @click="goToPage(1); clearCart()"
+            />
+          </div>
+          <div class="cart">
+            <div v-for="item in cart" class="row-body">
+              <div><img v-bind:src="item.image" alt="crimeScene" /></div>
+            </div>
+          </div>
+
+          <div class="setting1">
+            <div class="shelves">
+              <button class="back" @click="goToPage(2)">Back</button>
+              <div v-for="sherf in theftShelf" class="shelf">
+                <div v-for="item in sherf">
+                  <img
+                    v-bind:src="item.image"
+                    alt="crimeScene"
+                    @click="addCrime(item)"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="instructions">
+          Click on an item to add a crime to your cart. You will find out what
+          they are later.
+        </div>
+      </div>
+      <div class="page" v-if="page == 4">
+        <div class="wrapper">
+          <div class="home">
+            <img src="20230724_120249.png" alt="logo" @click="goToPage(1)" />
+          </div>
+          <div class="cart">
+            <div v-for="item in cart" class="row-body">
+              <div><img v-bind:src="item.image" alt="crimeScene" /></div>
+            </div>
+          </div>
+          <div class="setting1">
+            <div class="shelves">
+              <button class="back" @click="goToPage(2)">Back</button>
+              <div v-for="sherf in assaultShelf" class="shelf">
+                <div v-for="item in sherf">
+                  <img
+                    v-bind:src="item.image"
+                    alt="crimeScene"
+                    @click="addCrime(item)"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="instructions">
+          Click on an item to add a crime to your cart. You will find out what
+          they are later.
+        </div>
+      </div>
+
+      <div class="page" v-if="page == 5">
+        <div class="wrapper">
+          <div class="home">
+            <img
+              src="20230724_120249.png"
+              alt="logo"
+              @click="goToPage(1); clearCart()"
+            />
+          </div>
+          <div class="cart">
+            <div v-for="item in cart" class="row-body">
+              <div><img v-bind:src="item.image" alt="crimeScene" /></div>
+            </div>
+          </div>
+          <div class="setting1">
+            <div class="shelves">
+              <button class="back" @click="goToPage(2)">Back</button>
+              <div v-for="sherf in trafficShelf" class="shelf">
+                <div v-for="item in sherf">
+                  <img
+                    v-bind:src="item.image"
+                    alt="crimeScene"
+                    @click="addCrime(item)"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="instructions">
+          Click on an item to add a crime to your cart. You will find out what
+          they are later.
+        </div>
+      </div>
+      <div class="page" v-if="page == 6">
+        <div class="wrapper">
+          <div class="home">
+            <img
+              src="20230724_120249.png"
+              alt="logo"
+              @click="goToPage(1); clearCart()"
+            />
+          </div>
+          <div class="cart">
+            <div v-for="item in cart" class="row-body">
+              <div><img v-bind:src="item.image" alt="crimeScene" /></div>
+            </div>
+          </div>
+
+          <div class="setting1">
+            <div class="shelves">
+              <button class="back" @click="goToPage(2)">Back</button>
+              <div v-for="sherf in drugsShelf" class="shelf">
+                <div v-for="item in sherf">
+                  <img
+                    v-bind:src="item.image"
+                    alt="crimeScene"
+                    @click="addCrime(item)"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="instructions">
+          Click on an item to add a crime to your cart. You will find out what
+          they are later.
+        </div>
+      </div>
+      <div class="page" v-if="page == 7">
+        <div class="wrapper">
+          <div class="home">
+            <img
+              src="20230724_120249.png"
+              alt="logo"
+              @click="goToPage(1); clearCart()"
+            />
+          </div>
+          <div class="cart">
+            <div v-for="item in cart" class="row-body">
+              <div><img v-bind:src="item.image" alt="crimeScene" /></div>
+            </div>
+          </div>
+
+          <div class="setting1">
+            <div class="shelves">
+              <button class="back" @click="goToPage(2)">Back</button>
+              <div v-for="sherf in clearanceShelf" class="shelf">
+                <div v-for="item in sherf">
+                  <img
+                    v-bind:src="item.image"
+                    alt="crimeScene"
+                    @click="addCrime(item)"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="instructions">
+          Click on an item to add a crime to your cart. You will find out what
+          they are later.
+        </div>
+      </div>
+      <div class="page" v-if="page == 8">
+        <div class="wrapper">
+          <div class="home">
+            <img
+              src="20230724_120249.png"
+              alt="logo"
+              @click="goToPage(1); clearCart()"
+            />
+          </div>
+          <div class="receiptt">
+            <div class="row-head">
+              <div>ITEM</div>
+              <div>FINE</div>
+              <div>TIME</div>
+            </div>
+
+            <div class="scrill">
+              <div v-for="item in receipt">
+                <div v-for="crime in item" class="row-body">
+                  <div>{{crime.crime_name}}</div>
+                  <div>{{crime.max_penalty}}</div>
+                  <div>{{crime.jail_time}}</div>
+                </div>
+              </div>
+            </div>
+            <div class="row-footer">
+              <div>TOTAL</div>
+              <div>${{totalFine}}</div>
+              <div>{{totalTime}} years</div>
+            </div>
+          </div>
+
+          <div class="setting">
+            <img src="crime-checkout.png" alt="crimeScene" usemap="#workmap" />
+            <div>
+              <img
+                id="checkoutDisplay"
+                v-bind:src="cart[(cart.length-1)].image"
+                alt="crimeScene"
+                @click="payItem(cart[cart.length-1])"
+                v-if="cart.length > 0"
+              />
+              <div id="goingToJail" v-else>
+                <div id="jailImage">
+                  <img src="crime-mugshot-2.png" alt="mug" />
+
+                  <div><p>${{totalFine}}</p></div>
+                  <div><p>{{totalTime}} years!</p></div>
+                </div>
+                <button id="floatar" @click="clearCart()">Restart</button>
+                <img id="floatr" src="1689610273140.png" alt="bird" />
+                <div id="floatrText">
+                  <p>{{totalFine}}, {{rating}}</p>
+                  <img src="58adf251e612507e27bd3c32.png" alt="text" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="instructions">
+          Click on each item to add it to your reciept.
+        </div>
+      </div>
+    </div>
+    <script src="app.js"></script>
+    <script src="imageMapResizer.js"></script>
+  </body>
+</html>
